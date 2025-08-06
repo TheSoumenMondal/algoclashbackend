@@ -2,22 +2,22 @@
 
 A comprehensive microservices-based backend system for a competitive programming platform. This system handles problem management, code submission evaluation, and real-time communication between users and the evaluation system.
 
-## Workflow
-<img width="706" height="539" alt="Image" src="https://github.com/user-attachments/assets/642e9827-1984-4427-9cdf-4e7ffbcc9f40" />
+## System Architecture
 
+<img width="706" height="539" alt="System Architecture" src="https://github.com/user-attachments/assets/642e9827-1984-4427-9cdf-4e7ffbcc9f40" />
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 The backend is built using a **microservices architecture** with the following services:
 
-### 🔧 Core Services
+### Core Services
 
 1. **Problem Service** - Manages coding problems and test cases
 2. **Submission Service** - Handles code submissions and orchestrates evaluation
 3. **Evaluator Service** - Executes and evaluates submitted code using Docker containers
 4. **Socket Service** - Provides real-time communication for live updates
 
-### 🛠️ Technology Stack
+### Technology Stack
 
 - **Runtime**: Node.js with TypeScript
 - **Web Frameworks**:
@@ -29,7 +29,36 @@ The backend is built using a **microservices architecture** with the following s
 - **Real-time Communication**: Socket.IO
 - **Monitoring**: Bull Board for queue monitoring
 
-## 📋 Services Details
+## System Workflow
+
+Based on the architecture diagram, the complete submission evaluation workflow follows these steps:
+
+### 1. Code Submission Flow
+
+1. **Client Request (Step 1)**: Client submits code to Submission Service
+2. **Problem Details (Step 2)**: Submission Service fetches problem details from Problem Admin Service
+3. **Data Persistence (Step 6)**: Submission details are stored in the database
+4. **Queue Processing (Step 7)**: Submission is added to the Submission Queue for evaluation
+
+### 2. Code Evaluation Flow
+
+5. **Queue Processing (Step 8)**: Evaluator Service picks up jobs from Submission Queue
+6. **Docker Execution (Step 9)**: Code is executed in isolated Docker containers
+7. **Result Processing (Step 10)**: Evaluation results are processed and queued
+
+### 3. Real-time Communication Flow
+
+8. **Result Broadcasting (Step 11)**: Results are sent to Evaluation Queue
+9. **Socket Communication (Step 12)**: Evaluation Queue triggers Socket Service
+10. **Client Notification (Step 14)**: Socket Service sends real-time updates to clients
+
+### Queue Architecture
+
+- **Submission Queue**: Manages incoming code submissions for evaluation
+- **Evaluation Queue**: Handles evaluation results and real-time notifications
+- **Redis Backend**: Provides persistent storage for queue state and job data
+
+## Services Details
 
 ### 1. Problem Service
 
@@ -153,40 +182,7 @@ Provides real-time communication between clients and the backend system.
 - `getId` - Retrieve stored socket ID for user
 - `getPayload` - Broadcast evaluation results
 
-## 🔄 System Workflow
-
-### Complete Submission Process
-
-1. **Submission Receipt**:
-
-   ```
-   Client → Submission Service → MongoDB
-   ```
-
-2. **Problem Integration**:
-
-   ```
-   Submission Service → Problem Service API
-   ```
-
-3. **Queue Processing**:
-
-   ```
-   Submission Service → BullMQ → Evaluator Service
-   ```
-
-4. **Code Execution**:
-
-   ```
-   Evaluator → Docker Container → Result
-   ```
-
-5. **Real-time Updates**:
-   ```
-   Evaluator → Evaluation Queue → Socket Service → Client
-   ```
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -275,7 +271,7 @@ cd socket && npm run dev
 - **Socket Service**: http://localhost:3001
 - **Bull Board Monitoring**: http://localhost:3000/admin/queues
 
-## 🧪 Testing
+## Testing
 
 Test the submission flow:
 
@@ -284,7 +280,7 @@ cd evaluator
 node test-submission.js
 ```
 
-## 📊 Monitoring
+## Monitoring
 
 ### Bull Board Dashboard
 
@@ -301,7 +297,7 @@ Access the queue monitoring dashboard at `http://localhost:3000/admin/queues` to
 - **EvaluationQueue**: Handles evaluation result broadcasting
 - **Redis**: Stores queue state and job data
 
-## 🔒 Security Features
+## Security Features
 
 - **Docker Isolation**: Each code execution runs in isolated containers
 - **Memory Limits**: 512MB per container to prevent resource abuse
@@ -309,7 +305,7 @@ Access the queue monitoring dashboard at `http://localhost:3000/admin/queues` to
 - **Input Sanitization**: Code and input sanitization before execution
 - **Markdown Sanitization**: Safe HTML rendering for problem descriptions
 
-## 🏛️ Data Models
+## Data Models
 
 ### Problem Model
 
@@ -338,7 +334,7 @@ interface SubmissionType {
 }
 ```
 
-## 🔧 Development
+## Development
 
 ### Build Process
 
@@ -369,7 +365,7 @@ Each service follows a layered architecture:
 - **Models** - Database schemas
 - **Routes** - API endpoint definitions
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -377,17 +373,17 @@ Each service follows a layered architecture:
 4. Add tests if applicable
 5. Submit a pull request
 
-## 📜 License
+## License
 
 ISC License - see individual package.json files for details.
 
-## 👥 Author
+## Author
 
 **Soumen Mondal** - Full-stack developer and system architect
 
 ---
 
-## 🔗 Related Documentation
+## Related Documentation
 
 - [Bull Board Setup Guide](evaluator/BULL_BOARD_SETUP.md) - Detailed queue monitoring setup
 - [Problem Service API](problem/Readme.md) - Problem service specific documentation
