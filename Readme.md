@@ -2,6 +2,10 @@
 
 A comprehensive microservices-based backend system for a competitive programming platform. This system handles problem management, code submission evaluation, and real-time communication between users and the evaluation system.
 
+## Workflow
+<img width="706" height="539" alt="Image" src="https://github.com/user-attachments/assets/642e9827-1984-4427-9cdf-4e7ffbcc9f40" />
+
+
 ## 🏗️ Architecture Overview
 
 The backend is built using a **microservices architecture** with the following services:
