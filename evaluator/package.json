@@ -1,0 +1,38 @@
+{
+  "name": "evaluator",
+  "version": "1.0.0",
+  "description": "Evaluator service",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "node dist/index.js",
+    "dev": "concurrently \"tsc -w\" \"nodemon dist/index.js\"",
+    "type-check": "tsc --noEmit"
+  },
+  "author": "Soumen Mondal",
+  "license": "ISC",
+  "dependencies": {
+    "@bull-board/api": "^6.12.0",
+    "@bull-board/express": "^6.12.0",
+    "body-parser": "^2.2.0",
+    "bullmq": "^5.56.8",
+    "concurrently": "^9.2.0",
+    "cors": "^2.8.5",
+    "dockerode": "^4.0.7",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "http-status-codes": "^2.3.0",
+    "ioredis": "^5.6.1",
+    "zod": "^4.0.14"
+  },
+  "devDependencies": {
+    "@types/dockerode": "^3.3.42",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.3",
+    "@types/ioredis": "^4.28.10",
+    "nodemon": "^3.1.10",
+    "typescript": "^5.8.3"
+  }
+}

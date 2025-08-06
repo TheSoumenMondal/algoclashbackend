@@ -1,0 +1,32 @@
+{
+  "name": "submission",
+  "version": "1.0.0",
+  "description": "Submission service for algoclash",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "node dist/index.js",
+    "dev": "concurrently \"tsc -w\" \"nodemon --delay 2 dist/index.js\"",
+    "type-check": "tsc --noEmit"
+  },
+  "author": "Soumen Mondal",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "bullmq": "^5.56.9",
+    "concurrently": "^9.2.0",
+    "dotenv": "^17.2.1",
+    "fastify": "^5.4.0",
+    "fastify-plugin": "^5.0.1",
+    "ioredis": "^5.7.0",
+    "mongoose": "^8.17.0"
+  },
+  "devDependencies": {
+    "@types/ioredis": "^4.28.10",
+    "@types/node": "^24.1.0",
+    "nodemon": "^3.1.10",
+    "typescript": "^5.0.0"
+  }
+}
