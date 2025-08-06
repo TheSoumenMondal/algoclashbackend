@@ -373,15 +373,6 @@ Each service follows a layered architecture:
 4. Add tests if applicable
 5. Submit a pull request
 
-## License
-
-ISC License - see individual package.json files for details.
-
-## Author
-
-**Soumen Mondal** - Full-stack developer and system architect
-
----
 
 ## Related Documentation
 
